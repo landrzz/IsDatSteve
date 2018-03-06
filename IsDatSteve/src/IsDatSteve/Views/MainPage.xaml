@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core" 
+    xmlns:windows="clr-namespace:Xamarin.Forms.PlatformConfiguration.WindowsSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    ios:Page.UseSafeArea="true"
+    Title="{Binding Title}"
+    BackgroundColor="Silver"
+    x:Class="IsDatSteve.Views.MainPage" >
+    <ScrollView>
+	<StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Frame BackgroundColor="#0E0E0F" HorizontalOptions="FillAndExpand" Padding="2" Margin="8" >
+            <StackLayout HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="Transparent" Spacing="1" Orientation="Vertical" >
+                    <ffimageloading:CachedImage Source="nicePaintaBrule.png" HorizontalOptions="CenterAndExpand" HeightRequest="200" Aspect="AspectFit" Margin="1" DownsampleToViewSize="true" />
+                    <Label Text="Is dis a Brule thing?" TextColor="White" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+        </Frame>
+        <Frame VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="10" BackgroundColor="Silver" IsVisible="{Binding imageShowing}" >
+              <Image x:Name="setImage" Source="{Binding setImage}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"  Aspect="AspectFit" />
+        </Frame>
+
+
+        <Label Text="{Binding BrulesFinalWord}" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="EndAndExpand" TextColor="Navy" FontSize="Small" />
+        <ActivityIndicator x:Name="spinner" Color="{StaticResource PrimaryDark}" VerticalOptions="End" HorizontalOptions="Center" IsEnabled="{Binding SpinnerOn}" IsVisible="{Binding SpinnerOn}" IsRunning="{Binding SpinnerOn}"/>
+        <Button Text="( let's find out )" Command="{Binding HowYaWantPiczCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="End" BackgroundColor="{StaticResource PrimaryDark}" TextColor="White" Margin="8" />
+        <Button Text="Test Pin Code" Command="{Binding TestPinCodeCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="End" BackgroundColor="{StaticResource PrimaryDark}" TextColor="White" Margin="8" />
+	</StackLayout>
+        </ScrollView>
+</ContentPage>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="IsDatSteve.Views.ContentViews.NumericPinButton"
+            xmlns:imagecircle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+    x:Name="this">
+	<ContentView.Content>
+       
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <imagecircle:CircleImage WidthRequest="75" HeightRequest="75" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FillColor="Transparent" BorderColor="{Binding BorderColor, Source={x:Reference this}}" BorderThickness="3" />     <!--FillColor="{Binding tagColor, Converter={StaticResource StringToColorConverter}}"-->
+            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Spacing="0" Padding="0" >
+                <Label Text="{Binding DigitText, Source={x:Reference this}}" TextColor="{Binding DigitColor, Source={x:Reference this}}" FontSize="28" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" />
+                <Label Text="{Binding DigitLetters, Source={x:Reference this}}"  TextColor="{Binding DigitColor, Source={x:Reference this}}" FontSize="10" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" />
+            </StackLayout>
+        </Grid>
+      
+	</ContentView.Content>
+</ContentView>

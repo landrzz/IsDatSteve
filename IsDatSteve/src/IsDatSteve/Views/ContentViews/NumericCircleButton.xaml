@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:circle="clr-namespace:ButtonCircle.FormsPlugin.Abstractions;assembly=ButtonCircle.FormsPlugin.Abstractions"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+        x:Class="IsDatSteve.Views.ContentViews.NumericCircleButton"
+        x:Name="this">
+	<ContentView.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <circle:CircleButton WidthRequest="76" HeightRequest="76" BorderColor="{StaticResource PrimaryDark}" BorderThickness="2" BackgroundColor="Transparent"  >     <!--Command="{Binding MyCommand, Source={x:Reference this}}"-->
+                
+            </circle:CircleButton>
+            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Spacing="0" Padding="0" >
+                <Label Text="{Binding DigitText, Source={x:Reference this}}" TextColor="{Binding DigitColor, Source={x:Reference this}}" FontSize="28" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" />
+                <Label Text="{Binding DigitLetters, Source={x:Reference this}}"  TextColor="{Binding DigitColor, Source={x:Reference this}}" FontSize="10" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" />
+            </StackLayout>
+        </Grid>
+	</ContentView.Content>
+</ContentView>

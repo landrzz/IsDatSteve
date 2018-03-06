@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core" 
+    xmlns:windows="clr-namespace:Xamarin.Forms.PlatformConfiguration.WindowsSpecific;assembly=Xamarin.Forms.Core" 
+    ios:Page.UseSafeArea="true"
+    xmlns:circle="clr-namespace:ButtonCircle.FormsPlugin.Abstractions;assembly=ButtonCircle.FormsPlugin.Abstractions"
+    xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="IsDatSteve.Views.PinLoginPage"
+    BackgroundColor="{StaticResource LightGrayColor}"
+	x:Name="this" >
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button" x:Key="PinButton" >
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="BorderColor" Value="{StaticResource DarkBlueColor}" />
+                <Setter Property="WidthRequest" Value="76" />
+                <Setter Property="HeightRequest" Value="76" />
+                <Setter Property="BorderWidth" Value="2" />
+            </Style>
+
+            <Style TargetType="Label" x:Key="PinCircleLabel" >
+                <Setter Property="TextColor" Value="{Binding PinColor}" />
+                <Setter Property="FontSize" Value="22" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style TargetType="Label" x:Key="NumberLabel" >
+                <Setter Property="TextColor" Value="{StaticResource DarkBlueColor}" />
+                <Setter Property="FontSize" Value="28" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+            </Style>
+
+            <Style TargetType="Label" x:Key="LettersLabel" >
+                <Setter Property="TextColor" Value="{StaticResource DarkBlueColor}" />
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+            </Style>
+
+            <Style TargetType="StackLayout" x:Key="PinContentStack">
+                <Setter Property="Orientation" Value="Vertical" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="Spacing" Value="0" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="InputTransparent" Value="true" />
+            </Style>
+
+            <Style TargetType="Grid" x:Key="PinContentGrid">
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+	<ContentPage.Content>
+		<StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="5" >
+			<Label Text="Enter Passcode" FontSize="Medium" HorizontalOptions="CenterAndExpand" TextColor="{StaticResource DarkBlueColor}" />
+			<StackLayout x:Name="CodeStack" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Padding="8">
+				<iconize:IconLabel Text="{Binding PinNum1}" Style="{StaticResource PinCircleLabel}">
+				</iconize:IconLabel>
+				<iconize:IconLabel Text="{Binding PinNum2}" Style="{StaticResource PinCircleLabel}">
+				</iconize:IconLabel>
+				<iconize:IconLabel Text="{Binding PinNum3}" Style="{StaticResource PinCircleLabel}">
+				</iconize:IconLabel>
+				<iconize:IconLabel Text="{Binding PinNum4}" Style="{StaticResource PinCircleLabel}">
+				</iconize:IconLabel>
+			</StackLayout>
+			<BoxView HeightRequest="15" BackgroundColor="Transparent" />
+			<Grid VerticalOptions="Center" HorizontalOptions="Center" ColumnSpacing="26" RowSpacing="14" Padding="25, 2" x:Name="NumberGrid">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+
+				<!--1st Row-->
+				<ContentView Grid.Row="0" Grid.Column="0">
+    			      <Grid Style="{StaticResource PinContentGrid}">
+                            <circle:CircleButton Clicked="PinNum1" x:Name="btn1" Style="{StaticResource PinButton}" />
+                            <StackLayout Style="{StaticResource PinContentStack}" >
+                                <Label Text="1"  Style="{StaticResource NumberLabel}" x:Name="lbl1"/>
+                                <Label Text=" "  Style="{StaticResource LettersLabel}" x:Name="lblLetters1" />
+                            </StackLayout>
+                      </Grid>   
+				</ContentView>
+				<ContentView Grid.Row="0" Grid.Column="1">
+					<Grid Style="{StaticResource PinContentGrid}">
+                            <circle:CircleButton Clicked="PinNum2" x:Name="btn2" Style="{StaticResource PinButton}" />
+                            <StackLayout Style="{StaticResource PinContentStack}" >
+                                <Label Text="2"  Style="{StaticResource NumberLabel}" x:Name="lbl2" />
+                                <Label Text="ABC"  Style="{StaticResource LettersLabel}" x:Name="lblLetters2"/>
+                            </StackLayout>
+                     </Grid> 
+				</ContentView>
+				<ContentView Grid.Row="0" Grid.Column="2">
+					<Grid Style="{StaticResource PinContentGrid}">
+                            <circle:CircleButton Clicked="PinNum3" x:Name="btn3" Style="{StaticResource PinButton}" />
+                            <StackLayout Style="{StaticResource PinContentStack}" >
+                                <Label Text="3"  Style="{StaticResource NumberLabel}" x:Name="lbl3"/>
+                                <Label Text="DEF"  Style="{StaticResource LettersLabel}" x:Name="lblLetters3"/>
+                            </StackLayout>
+
+                      </Grid> 
+				</ContentView>
+				<!--2nd Row-->
+				<ContentView Grid.Row="1" Grid.Column="0">
+					<Grid Style="{StaticResource PinContentGrid}">
+                            <circle:CircleButton Clicked="PinNum4" x:Name="btn4" Style="{StaticResource PinButton}" />
+                            <StackLayout Style="{StaticResource PinContentStack}" >
+                                <Label Text="4"  Style="{StaticResource NumberLabel}" x:Name="lbl4"/>
+                                <Label Text="GHI"  Style="{StaticResource LettersLabel}" x:Name="lblLetters4"/>
+                            </StackLayout>
+                      </Grid> 
+				</ContentView>
+				<ContentView Grid.Row="1" Grid.Column="1">
+					<Grid Style="{StaticResource PinContentGrid}">
+                            <circle:CircleButton Clicked="PinNum5" x:Name="btn5" Style="{StaticResource PinButton}" />
+                            <StackLayout Style="{StaticResource PinContentStack}" >
+                                <Label Text="5"  Style="{StaticResource NumberLabel}" x:Name="lbl5"/>
+                                <Label Text="JKL"  Style="{StaticResource LettersLabel}" x:Name="lblLetters5"/>
+                            </StackLayout>
+                      </Grid> 
+				</ContentView>
+				<ContentView Grid.Row="1" Grid.Column="2">
+					<Grid Style="{StaticResource PinContentGrid}">
+                            <circle:CircleButton Clicked="PinNum6" x:Name="btn6" Style="{StaticResource PinButton}" />
+                            <StackLayout Style="{StaticResource PinContentStack}" >
+                                <Label Text="6"  Style="{StaticResource NumberLabel}" x:Name="lbl6"/>
+                                <Label Text="MNO"  Style="{StaticResource LettersLabel}" x:Name="lblLetters6" />
+                            </StackLayout>
+                      </Grid> 
+				</ContentView>
+				<!--3rd Row-->
+				<ContentView Grid.Row="2" Grid.Column="0">
+					<Grid Style="{StaticResource PinContentGrid}">
+                            <circle:CircleButton Clicked="PinNum7" x:Name="btn7" Style="{StaticResource PinButton}" />
+                            <StackLayout Style="{StaticResource PinContentStack}" >
+                                <Label Text="7"  Style="{StaticResource NumberLabel}" x:Name="lbl7"/>
+                                <Label Text="PQRS"  Style="{StaticResource LettersLabel}" x:Name="lblLetters7"/>
+                            </StackLayout>
+                      </Grid> 
+				</ContentView>
+				<ContentView Grid.Row="2" Grid.Column="1">
+					<Grid Style="{StaticResource PinContentGrid}">
+                            <StackLayout Style="{StaticResource PinContentStack}" >
+                                <Label Text="8"  Style="{StaticResource NumberLabel}" x:Name="lbl8" />
+                                <Label Text="TUV"  Style="{StaticResource LettersLabel}" x:Name="lblLetters8"/>
+                            </StackLayout>
+                            <circle:CircleButton Clicked="PinNum8" x:Name="btn8" Style="{StaticResource PinButton}" />
+                      </Grid> 
+				</ContentView>
+				<ContentView Grid.Row="2" Grid.Column="2">
+					<Grid Style="{StaticResource PinContentGrid}">
+                            <StackLayout Style="{StaticResource PinContentStack}" >
+                                <Label Text="9"  Style="{StaticResource NumberLabel}" x:Name="lbl9"/>
+                                <Label Text="WXYZ"  Style="{StaticResource LettersLabel}" x:Name="lblLetters9" />
+                            </StackLayout>
+                            <circle:CircleButton Clicked="PinNum9" x:Name="btn9" Style="{StaticResource PinButton}" />
+                      </Grid> 
+				</ContentView>
+				<!--4th Row-->
+				<ContentView Grid.Row="3" Grid.Column="1">
+					<Grid Style="{StaticResource PinContentGrid}">
+                            <StackLayout Style="{StaticResource PinContentStack}" >
+                                <Label Text="0"  Style="{StaticResource NumberLabel}" x:Name="lbl0" />
+                                <Label Text=" "  Style="{StaticResource LettersLabel}" x:Name="lblLetters0"/>
+                            </StackLayout>
+                            <circle:CircleButton Clicked="PinNum0" x:Name="btn0" Style="{StaticResource PinButton}" />
+                      </Grid> 
+				</ContentView>
+				<ContentView Grid.Row="3" Grid.Column="2">
+					<Label Text="{Binding CancelDeleteText}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="{StaticResource DarkBlueColor}" FontSize="Medium" />
+					<ContentView.GestureRecognizers>
+						<TapGestureRecognizer Command="{Binding CancelDeleteButtonTappedCommand}" BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}" CommandParameter="0" />
+					</ContentView.GestureRecognizers>
+				</ContentView>
+			</Grid>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>
