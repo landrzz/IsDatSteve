@@ -13,6 +13,7 @@ namespace IsDatSteve.Helpers
         public static Color LightGrayColor = Color.FromHex("#dddfe5");
         public static Color DarkBlueColor = Color.FromHex("#1D294A");
         public static Color RoyalBlueColor = Color.FromHex("#2c4897");
+        public static Color WhiteGray = Color.FromHex("#eaebef");
     }
 }
 

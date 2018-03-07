@@ -42,57 +42,71 @@ namespace IsDatSteve.ViewModels
         {
             get
             {
-                return new Command(async (num) =>
+                return new Command( (num) =>
                 {
-                    try
+                    if (IsBusy)
+                        return;
+                    
+                    if (num != null)
                     {
-                        if (num != null)
-                        {
-                            var strNum = num as string;
-                            var intNum = int.Parse(strNum);
-                            MostRecentlyFocusedNumber = strNum;
-
-                            ClickCounter++;
-                            if (ClickCounter == 1)
-                            {
-                                PinColor = Color.FromHex("#4b636e");
-                                PinNum1 = "fa-circle";
-                                CancelDeleteText = "Delete";
-                                CodeBuilder = MostRecentlyFocusedNumber;
-                            }
-                            else if (ClickCounter == 2)
-                            {
-                                PinNum1 = "fa-circle";
-                                PinNum2 = "fa-circle";
-                                CancelDeleteText = "Delete";
-                                CodeBuilder = $"{CodeBuilder}{num}";
-                            }
-                            else if (ClickCounter == 3)
-                            {
-                                PinNum3 = "fa-circle";
-                                CancelDeleteText = "Delete";
-                                CodeBuilder = $"{CodeBuilder}{num}";
-                            }
-                            else if (ClickCounter == 4)
-                            {
-                                PinNum4 = "fa-circle";
-                                CancelDeleteText = "Delete";
-                                CodeBuilder = $"{CodeBuilder}{num}";
-                                await Task.Delay(150);
-                                await CheckForCorrectCode();
-                            }
-                            else if (ClickCounter > 4)
-                            {
-                                Debug.WriteLine("Something's wrong. How did I get here?");
-                            }
-
-                            Debug.WriteLine($"Current Code Combo: {CodeBuilder}");
-                        }
-                    } catch (Exception e)
-                    {
-                        Debug.WriteLine(e.Message);
+                        IsBusy = true;
+                        var strNum = num as string;
+                        PinTappedLogic(strNum);
+                        IsBusy = false;
                     }
                 });
+            }
+        }
+
+        public async void PinTappedLogic(string strNum)
+        {
+            try
+            {
+                if (strNum != null)
+                {
+                    var intNum = int.Parse(strNum);
+                    MostRecentlyFocusedNumber = strNum;
+
+                    ClickCounter++;
+                    if (ClickCounter == 1)
+                    {
+                        PinColor = Helpers.StyleKit.DarkBlueColor;
+                        PinNum1 = "fa-circle";
+                        CancelDeleteText = "Delete";
+                        CodeBuilder = MostRecentlyFocusedNumber;
+                    }
+                    else if (ClickCounter == 2)
+                    {
+                        PinNum1 = "fa-circle";
+                        PinNum2 = "fa-circle";
+                        CancelDeleteText = "Delete";
+                        CodeBuilder = $"{CodeBuilder}{strNum}";
+                    }
+                    else if (ClickCounter == 3)
+                    {
+                        PinNum3 = "fa-circle";
+                        CancelDeleteText = "Delete";
+                        CodeBuilder = $"{CodeBuilder}{strNum}";
+                    }
+                    else if (ClickCounter == 4)
+                    {
+                        PinNum4 = "fa-circle";
+                        CancelDeleteText = "Delete";
+                        CodeBuilder = $"{CodeBuilder}{strNum}";
+                        await Task.Delay(80);
+                        await CheckForCorrectCode();
+                    }
+                    else if (ClickCounter > 4)
+                    {
+                        Debug.WriteLine("Something's wrong. How did I get here?");
+                    }
+
+                    Debug.WriteLine($"Current Code Combo: {CodeBuilder}");
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
             }
         }
 
@@ -102,55 +116,65 @@ namespace IsDatSteve.ViewModels
             {
                 return new Command(() =>
                 {
-                    try
-                    {
-                        if (CancelDeleteText == "Cancel")
-                        {
-                            _navigationService.GoBackAsync(null, false, true);
-                            return;
-                        }
-
-                        if (ClickCounter == 0)
-                        {
-                            CancelDeleteText = "Cancel";   
-                        }
-                        else if (ClickCounter == 1)
-                        {
-                            PinNum1 = "fa-circle-o";
-                            CancelDeleteText = "Cancel";
-
-                            CodeBuilder = string.Empty;
-                        }
-                        else if (ClickCounter == 2)
-                        {
-                            PinNum2 = "fa-circle-o";
-                            CancelDeleteText = "Delete";
-                            CodeBuilder = new string(CodeBuilder.Take(1).ToArray());
-                        }
-                        else if (ClickCounter == 3)
-                        {
-                            PinNum3 = "fa-circle-o";
-                            CancelDeleteText = "Delete";
-                            CodeBuilder = new string(CodeBuilder.Take(2).ToArray());
-                        }
-                        else if (ClickCounter == 4)
-                        {
-                            PinNum4 = "fa-circle-o";
-                            CancelDeleteText = "Delete";
-                        }
-                        else if (ClickCounter > 4)
-                        {
-                            Debug.WriteLine("How did I get here?");
-                        }
-                        ClickCounter--;
-
-                        Debug.WriteLine($"Current Code Combo: {CodeBuilder}");
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.WriteLine(e.Message);
-                    }
+                    if (IsBusy)
+                        return;
+                    
+                    IsBusy = true;
+                    CancelDeleteTappedLogic();
+                    IsBusy = false;
                 });
+            }
+        }
+
+        public async void CancelDeleteTappedLogic()
+        {
+            try
+            {
+                if (CancelDeleteText == "Cancel")
+                {
+                    await _navigationService.GoBackAsync(null, false, true);
+                    return;
+                }
+
+                if (ClickCounter == 0)
+                {
+                    CancelDeleteText = "Cancel";
+                }
+                else if (ClickCounter == 1)
+                {
+                    PinNum1 = "fa-circle-o";
+                    CancelDeleteText = "Cancel";
+
+                    CodeBuilder = string.Empty;
+                }
+                else if (ClickCounter == 2)
+                {
+                    PinNum2 = "fa-circle-o";
+                    CancelDeleteText = "Delete";
+                    CodeBuilder = new string(CodeBuilder.Take(1).ToArray());
+                }
+                else if (ClickCounter == 3)
+                {
+                    PinNum3 = "fa-circle-o";
+                    CancelDeleteText = "Delete";
+                    CodeBuilder = new string(CodeBuilder.Take(2).ToArray());
+                }
+                else if (ClickCounter == 4)
+                {
+                    PinNum4 = "fa-circle-o";
+                    CancelDeleteText = "Delete";
+                }
+                else if (ClickCounter > 4)
+                {
+                    Debug.WriteLine("How did I get here?");
+                }
+                ClickCounter--;
+
+                Debug.WriteLine($"Current Code Combo: {CodeBuilder}");
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
             }
         }
 
@@ -163,6 +187,7 @@ namespace IsDatSteve.ViewModels
             {
                 Helpers.HapticsHelper.VibrateFail();
                 _userDialogs.Alert("Code Was Correct. Yay.");
+                CodeBuilder = string.Empty;
                 //Navigate Here
 
             } else 

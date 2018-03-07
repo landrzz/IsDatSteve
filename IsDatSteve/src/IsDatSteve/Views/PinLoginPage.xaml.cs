@@ -84,15 +84,18 @@ namespace IsDatSteve.Views
         public async Task ClickHappened(string btnNum, Button btn, Label lblNum, Label lblLetters)
         {
             binding.PinButtonTappedCommand.Execute(btnNum);
-            btn.BackgroundColor = Color.WhiteSmoke;
-            btn.BorderColor = StyleKit.RoyalBlueColor;
-            lblNum.TextColor = StyleKit.RoyalBlueColor;
-            lblLetters.TextColor = StyleKit.RoyalBlueColor;
-            await Task.Delay(130);
-            btn.BackgroundColor = Color.Transparent;
+
+            btn.BorderColor = StyleKit.OliveGreenColor;
+            lblNum.TextColor = StyleKit.OliveGreenColor;
+            lblLetters.TextColor = StyleKit.OliveGreenColor;
+            btn.BackgroundColor = StyleKit.WhiteGray;
+
+            await Task.Delay(140);
+
             btn.BorderColor = StyleKit.DarkBlueColor;
             lblNum.TextColor = StyleKit.DarkBlueColor;
             lblLetters.TextColor = StyleKit.DarkBlueColor;
+            btn.BackgroundColor = Color.Transparent;
         }
     }
 }
